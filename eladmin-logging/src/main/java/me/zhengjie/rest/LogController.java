@@ -20,7 +20,9 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import me.zhengjie.annotation.Log;
 import me.zhengjie.service.LogService;
+import me.zhengjie.service.StudentInfoService;
 import me.zhengjie.service.dto.LogQueryCriteria;
+import me.zhengjie.service.dto.StudentInfoQueryCriteria;
 import me.zhengjie.utils.SecurityUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -41,6 +43,7 @@ import java.io.IOException;
 public class LogController {
 
     private final LogService logService;
+    private final StudentInfoService studentInfoService;
 
     @Log("导出数据")
     @ApiOperation("导出数据")
@@ -105,5 +108,11 @@ public class LogController {
     public ResponseEntity<Object> delAllInfoLog(){
         logService.delAllByInfo();
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping("/queryUser")
+    @ApiOperation("列表查询")
+    @PreAuthorize("@el.check('user:list')")
+    public ResponseEntity<Object> queryUser(StudentInfoQueryCriteria criteria, Pageable pageable) {
+        return new ResponseEntity<>(studentInfoService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 }

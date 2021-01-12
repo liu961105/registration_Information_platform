@@ -38,6 +38,12 @@
             <artifactId>eladmin-tools</artifactId>
             <version>2.6</version>
         </dependency>
+        <!--学生信息录入模块-->
+        <dependency>
+        <groupId>me.zhengjie</groupId>
+        <artifactId>eladmin-student</artifactId>
+        <version>2.6</version>
+    </dependency>
 
         <!-- Spring boot websocket -->
 		<dependency>
